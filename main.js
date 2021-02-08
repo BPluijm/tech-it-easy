@@ -161,3 +161,132 @@ const inventory = [
     sold: 8,
   },
 ];
+
+// Opdracht 1.A
+const leftToSell = inventory.map((television) => {
+  return television.originalStock - television.sold;
+});
+const totalCount = leftToSell.reduce((a, b) => a + b)
+
+
+// Opdracht 1.B
+document.getElementById('left-to-sell');
+document.getElementById("left-to-sell").textContent = totalCount;
+
+
+// Opdracht 2.A
+const allTvNames = (products) => products.map((tv) => `${tv.brand} ${tv.type}`);
+console.log('Opdracht 2a: ', allTvNames(inventory));
+
+// Opdracht 2.B:
+const soldOut = inventory.filter((television) => {
+  return television.originalStock === television.sold
+});
+console.log("UITVERKOCHT", soldOut);
+
+
+// Opdracht 2c:
+const backLight = inventory.filter((inventory) => {
+  return inventory.options.ambiLight === inventory.options.ambiLight;
+});
+console.log(backLight);
+
+
+// Opdracht 2d:
+inventory.sort((a, b) => {
+  return a.price - b.price;
+});
+
+
+// Opdracht 3a
+function calculateTargetRevenue (products) {
+  let revenueTarget = 0;
+  for (const product of products) {
+    const revenueTargetPerProduct = product.originalStock * product.price;
+    revenueTarget = revenueTarget + revenueTargetPerProduct;
+  }
+  return revenueTarget;
+}
+const revenueTarget = calculateTargetRevenue(inventory)
+
+
+const revenueTargetElement = document.getElementById("revenue-target")
+
+revenueTargetElement.textContent = revenueTarget;
+
+
+// Opdracht 3b
+function currentProfit(products) {
+  const profitPerItem = products.map((product) => product.sold * product.price);
+  return profitPerItem.reduce((itemA, itemB) => itemA + itemB);
+}
+
+const totalProfit = document.querySelector('#total-profit');
+totalProfit.textContent = currentProfit(inventory).toLocaleString('nl-NL', {
+  style: 'currency',
+  currency: 'EUR',
+});
+
+
+// Opdracht 4
+function display(product) {
+  const productElement = document.createElement('li');
+  const price = document.createElement('span');
+  const panel = document.createElement('div');
+  const panelText = document.createElement('p');
+
+  productElement.classList.add('product-list__item');
+  price.classList.add('price');
+  panel.classList.add('product-list__panel');
+
+  productElement.textContent = toString(product);
+  price.textContent = formatPrice(product.price);
+  panelText.textContent = screenSizesToString(product);
+
+  const list = document.querySelector('.product-list');
+  list.appendChild(productElement);
+  list.appendChild(panel);
+  productElement.appendChild(price);
+  panel.appendChild(panelText);
+}
+
+for (let i = 0; i < inventory.length; i++) {
+  display(inventory[i]);
+}
+
+
+// Opdracht 5a
+function toString(product) {
+  return `${product.brand} ${product.type} – ${product.name}`;
+}
+
+
+// Opdracht 5b
+function formatPrice(productPrice) {
+  return `€ ${productPrice},-`;
+}
+
+
+// Opdracht 5c
+function screenSizesToString(product) {
+  const screenSizes = product.availableSizes;
+  let string = '';
+  for (let i = 0; i < screenSizes.length; i++) {
+    string += `${screenSizes[i]} inch (${(screenSizes[i] * 2.54).toFixed(0)} cm)`;
+    if (i !== screenSizes.length - 1) {
+      string += ' | ';
+    }
+  }
+  return string;
+}
+
+
+// Opdracht 5d
+
+
+
+// Opdracht 5e
+
+
+
+// #### Bonusopdracht

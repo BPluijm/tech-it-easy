@@ -1,0 +1,40 @@
+body {
+    display: block;
+    background-color: lightslategrey;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+}
+
+.container {
+   display: block;
+   flex-direction: row;
+   justify-content: left;
+}
+
+div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#left-to-sell {
+    height: auto;
+    width: auto;
+    background-color: red;
+    border-radius: 8px;
+}
+
+#revenue-target {
+    height: 50px;
+    width: auto;
+    background-color: blue;
+    border-radius: 8px;
+}
+
+#revenue {
+    height: auto;
+    width: auto;
+    border-radius: 8px;
+    background-color: green;
+}
